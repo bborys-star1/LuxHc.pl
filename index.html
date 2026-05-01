@@ -8,117 +8,129 @@
     <style>
         :root {
             --main-blue: #00a2ff;
-            --discord-blurple: #5865F2;
+            --bg-dark: #111111;
+            --discord: #5865F2;
             --green-shop: #2eff8c;
             --social-pink: #ff4db8;
-            --yellow-accent: #ffcc00;
+            --lux-purple: #9c27b0;
+            --yellow-btn: #ffcc00;
         }
 
-        @keyframes floatLudzik {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        /* --- ANIMACJE --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
-        body { background-color: #f4f7f6; font-family: 'Poppins', sans-serif; margin: 0; scroll-behavior: smooth; overflow-x: hidden; }
+        body { background-color: #f8faf9; font-family: 'Poppins', sans-serif; margin: 0; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* --- NAWIGACJA --- */
         .header-nav { 
-            display: flex; gap: 40px; justify-content: center; padding: 15px 0; background: white;
-            font-weight: 900; text-transform: uppercase; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            display: flex; gap: 40px; justify-content: center; padding: 25px 0; background: white;
+            font-weight: 900; text-transform: uppercase; align-items: center; position: sticky;
+            top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
-        .header-nav a { text-decoration: none; color: #333; transition: 0.3s; cursor: pointer; font-size: 0.9rem; position: relative; }
-        #cart-dot { position: absolute; top: -10px; right: -15px; background: #ff4d4d; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; display: none; }
+        .header-nav a { text-decoration: none; color: #333; transition: 0.3s; cursor: pointer; position: relative; font-size: 0.9rem; }
+        #cart-dot { position: absolute; top: -10px; right: -18px; background: #ff4d4d; color: white; font-size: 11px; padding: 2px 7px; border-radius: 50%; display: none; }
 
-        /* --- BANNER (Przycięty zgodnie z image_2e27a2.png) --- */
-        .landing-page { padding: 30px 0; display: flex; justify-content: center; background: white; }
-        .main-hero-container { display: flex; gap: 20px; max-width: 1200px; width: 95%; height: 320px; }
-
-        .hero-box {
-            flex: 2; text-align: center; color: white;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-image: url('tlo.png'); 
-            background-size: cover;
-            background-position: center;
-            border-radius: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        /* --- HERO --- */
+        .landing-page { padding: 60px 0; display: flex; justify-content: center; background: white; }
+        .main-hero-container { display: flex; gap: 25px; max-width: 1200px; width: 95%; }
+        .hero-box { 
+            background: #0e0e0e; border-radius: 40px; flex: 2; padding: 50px; text-align: center; color: white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); animation: fadeInUp 0.8s ease-out;
         }
-        .hero-box img { width: 100px; margin-bottom: 10px; }
-        .hero-box h1 { font-size: 3.5rem; margin: 0; font-weight: 900; }
-        .ip-btn { background: #4da6ff; color: white; border: none; padding: 12px 30px; border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 15px; }
-
-        .hero-side-btns { flex: 0.6; display: flex; flex-direction: column; gap: 15px; }
-        .side-btn { flex: 1; border-radius: 25px; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.2rem; text-decoration: none; text-transform: uppercase; transition: 0.3s; }
+        .hero-box img { width: 150px; animation: float 4s infinite ease-in-out; }
+        .hero-box h1 { font-size: 3.5rem; margin: 15px 0; font-weight: 900; letter-spacing: 2px; }
+        .ip-btn { background: var(--main-blue); color: white; border: none; padding: 15px 50px; border-radius: 15px; font-weight: 900; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        
+        .hero-side-btns { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        .side-btn { flex: 1; border-radius: 30px; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.4rem; text-decoration: none; text-transform: uppercase; transition: 0.3s; }
         .btn-shop { background: var(--green-shop); color: #000; }
-        .btn-social { background: var(--social-pink); color: white; }
+        .btn-discord { background: var(--discord); color: white; }
 
-        /* --- SKLEP (Przywrócony wygląd kafelkowy) --- */
+        /* --- TABELA RANG --- */
         .container { max-width: 1200px; margin: 50px auto; width: 95%; }
-        .section-title { text-align: center; font-weight: 900; font-size: 2.2rem; margin-bottom: 40px; text-transform: uppercase; }
-        .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .shop-box { background: white; border-radius: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 50px; border: 1px solid #eee; }
+        .rank-table { width: 100%; border-collapse: collapse; text-align: center; }
+        .rank-header { padding: 30px 10px; font-weight: 900; }
+        .rank-table td { padding: 15px; border-bottom: 1px solid #eee; font-weight: bold; }
+        .desc-col { text-align: left; padding-left: 25px !important; color: #555; background: #fafafa; }
         
-        .item-card { 
-            background: white; border-radius: 30px; border: 1px solid #eee; text-align: center; 
-            overflow: hidden; transition: 0.3s; padding-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        .th-vip { background: #ffeb3b; }
+        .th-svip { background: #ff9800; color: white; }
+        .th-lux { background: #03a9f4; color: white; }
+        .th-pakiet { background: #f3e5f5; color: var(--lux-purple); border: 2px solid var(--lux-purple); }
+
+        .price-wrapper { 
+            background: rgba(255,255,255,0.3); padding: 8px 15px; border-radius: 10px; 
+            display: inline-block; margin-top: 10px; font-size: 1rem; width: 85%;
+            font-weight: 900; border: 1px solid rgba(0,0,0,0.1); cursor: pointer; transition: 0.2s;
         }
-        .item-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .item-img-box { background: #fdfdfd; height: 200px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; }
-        .item-card h3 { margin: 15px 0 5px 0; font-weight: 900; }
-        .item-card p { color: #777; font-size: 0.9rem; padding: 0 20px; min-height: 40px; }
+        .price-wrapper:hover { background: white; color: black; }
+        .check { color: #2ecc71; font-size: 1.2rem; }
+        .cross { color: #e74c3c; font-size: 1.2rem; }
+
+        /* --- GRID PAKIETÓV --- */
+        .section-title { text-align: center; margin: 60px 0 30px; text-transform: uppercase; font-weight: 900; font-size: 2.2rem; }
+        .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .item-card { background: white; padding: 30px; border-radius: 30px; border: 1px solid #eee; text-align: center; transition: 0.3s; }
+        .item-card:hover { transform: translateY(-5px); border-color: var(--main-blue); }
+        .value-tag { font-size: 0.7rem; color: #999; font-weight: 900; display: block; margin-bottom: 10px; }
         
-        .price-tag { color: var(--main-blue); font-size: 1.8rem; font-weight: 900; margin: 15px 0; display: block; }
         .buy-btn { 
-            background: var(--yellow-accent); border: none; width: 85%; padding: 15px; 
-            font-weight: 900; cursor: pointer; border-radius: 15px; transition: 0.2s; text-transform: uppercase;
+            background: var(--yellow-btn); border: none; width: 100%; padding: 15px; 
+            font-weight: 900; cursor: pointer; border-radius: 12px; margin-top: 15px;
+            font-size: 1rem; transition: 0.3s;
         }
 
-        /* --- KOSZYK (Poprawiony, nie ucięty) --- */
-        #cart-sidebar { 
-            position: fixed; top: 0; right: -450px; width: 400px; max-width: 100%; height: 100vh; 
-            background: white; z-index: 5000; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 30px; 
-            display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
+        /* --- KOSZYK SIDEBAR --- */
+        #cart-sidebar {
+            position: fixed; top: 0; right: -450px; width: 380px; max-width: 100%; height: 100vh;
+            background: white; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 5000;
+            transition: 0.4s; padding: 30px; display: flex; flex-direction: column; box-sizing: border-box;
         }
         #cart-sidebar.active { right: 0; }
-        #cart-list { flex: 1; overflow-y: auto; padding-right: 5px; } 
-        
-        /* --- DISCORD (CZARNE TŁO) --- */
-        .discord-section {
-            max-width: 1200px; width: 95%; margin: 50px auto; padding: 40px;
-            display: flex; align-items: center; background: #000; border-radius: 35px;
-        }
-        .discord-content { display: flex; align-items: center; justify-content: space-around; width: 100%; flex-wrap: wrap; gap: 20px; }
-        .ludzik-img { width: 180px; animation: floatLudzik 3s infinite ease-in-out; }
-        .discord-info { color: white; text-align: center; }
-        .members-count { font-size: 4rem; font-weight: 900; color: white; display: block; }
-        .join-btn { background: white; color: black; padding: 15px 40px; border-radius: 15px; text-decoration: none; font-weight: 900; display: inline-block; margin-top: 15px; }
+        #cart-items-list { flex: 1; overflow-y: auto; }
 
-        #toast { visibility: hidden; background: #111; color: #fff; padding: 15px 30px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; font-weight: 900; }
-        #toast.show { visibility: visible; }
+        /* --- MODALE / TOAST --- */
+        #details-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 6000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+        .details-card { background: white; padding: 30px; border-radius: 25px; border: 4px solid var(--lux-purple); width: 320px; text-align: center; }
+        #toast { visibility: hidden; background: #111; color: #fff; padding: 15px 30px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 7000; font-weight: 900; }
+        #toast.show { visibility: visible; animation: fadeInUp 0.3s; }
 
-        footer { text-align: center; padding: 30px; color: #bbb; font-weight: 700; }
+        footer { text-align: center; padding: 60px 0; color: #bbb; font-weight: 900; }
     </style>
 </head>
 <body>
 
+<!-- KOSZYK -->
 <div id="cart-sidebar">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
         <h2 style="margin:0; font-weight:900;">KOSZYK</h2>
-        <span onclick="toggleCart()" style="cursor:pointer; font-size:2.5rem; line-height:1;">&times;</span>
+        <span style="cursor:pointer; font-size:2rem;" onclick="closeCart()">&times;</span>
     </div>
-    <div id="cart-list"></div>
-    <div style="border-top:2px solid #eee; padding-top:20px; margin-top: auto;">
-        <div style="display:flex; justify-content:space-between; font-size:1.5rem; font-weight: 900; margin-bottom:15px;">
+    <div id="cart-items-list">
+        <p style="text-align:center; color:#999; margin-top:50px;">Koszyk jest pusty...</p>
+    </div>
+    <div style="border-top:2px solid #eee; padding-top:20px;">
+        <div style="display:flex; justify-content:space-between; font-size:1.5rem; font-weight:900; margin-bottom:15px;">
             <span>SUMA:</span>
-            <span id="total-price" style="color: var(--main-blue);">0.00 ZŁ</span>
+            <span id="cart-total-price">0 ZŁ</span>
         </div>
-        <button onclick="checkout()" style="width:100%; background:var(--discord-blurple); color:white; border:none; padding:18px; border-radius:15px; font-weight:900; cursor:pointer;">FINALIZUJ ZAKUP</button>
+        <button class="buy-btn" style="background:var(--discord); color:white;" onclick="checkout()">FINALIZUJ (DISCORD)</button>
     </div>
 </div>
 
 <nav class="header-nav">
     <a href="#shop">SKLEP</a>
     <img src="image_efc264.png" height="40">
-    <a onclick="toggleCart()" style="position:relative;">KOSZYK <span id="cart-dot">0</span></a>
-    <a href="https://guns.lol/m1czzzzz" target="_blank" style="color:var(--social-pink)">SOCIALE</a>
+    <a onclick="openCart()">KOSZYK <span id="cart-dot">0</span></a>
+    <a href="https://discord.gg/YCGZD43BVA" target="_blank" style="color:var(--discord)">DISCORD</a>
 </nav>
 
 <section class="landing-page">
@@ -126,133 +138,151 @@
         <div class="hero-box">
             <img src="image_efc264.png">
             <h1>LUXHC.PL</h1>
-            <button class="ip-btn" onclick="copyIP()">IP: LUXHC.PL (KOPIUJ)</button>
+            <button class="ip-btn" onclick="copyIP()">IP: LUXHC.PL</button>
         </div>
         <div class="hero-side-btns">
             <a href="#shop" class="side-btn btn-shop">SKLEP</a>
-            <a href="https://guns.lol/m1czzzzz" target="_blank" class="side-btn btn-social">SOCIALE</a>
+            <a href="https://discord.gg/YCGZD43BVA" target="_blank" class="side-btn btn-discord">DISCORD</a>
         </div>
     </div>
 </section>
 
 <div id="shop" class="container">
-    <h2 class="section-title">💎 DOSTĘPNE PAKIETY</h2>
+    <h2 class="section-title">🏆 Porównanie Rang</h2>
+    <div class="shop-box">
+        <table class="rank-table">
+            <thead>
+                <tr>
+                    <th class="desc-col">CECHY</th>
+                    <th class="rank-header th-vip">VIP<br><button class="price-wrapper" onclick="addToCart('VIP', 14.99)">14.99 ZŁ</button></th>
+                    <th class="rank-header th-svip">SVIP<br><button class="price-wrapper" onclick="addToCart('SVIP', 39.99)">39.99 ZŁ</button></th>
+                    <th class="rank-header th-lux">LUX<br><button class="price-wrapper" onclick="addToCart('LUX', 59.99)">59.99 ZŁ</button></th>
+                    <th class="rank-header th-pakiet">PAKIET LUX<br><button class="price-wrapper" onclick="addToCart('PAKIET LUX', 69.99)">69.99 ZŁ</button>
+                    <br><span style="font-size:0.7rem; cursor:pointer; text-decoration:underline;" onclick="showDetails()">🔍 Co zawiera?</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="desc-col">Zestaw (Kit)</td><td>VIP</td><td>SVIP</td><td>LUX</td><td>LUX</td></tr>
+                <tr><td class="desc-col">Ilość sethome</td><td>2</td><td>3</td><td>5</td><td>5</td></tr>
+                <tr><td class="desc-col">Mnożnik Dropu</td><td>1.2x</td><td>1.5x</td><td>2.0x</td><td>2.0x</td></tr>
+                <tr><td class="desc-col">Pisanie Kolorami</td><td class="cross">✘</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                <tr><td class="desc-col">Komenda /repair</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                <tr><td class="desc-col">Komenda /ec</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-title">💎 Pakiety Bogacza</h2>
     <div class="grid-items">
-        <!-- VIP -->
         <div class="item-card">
-            <div class="item-img-box"><img src="vip.png" style="width:120px;" onerror="this.parentElement.innerHTML='OBRAZEK VIP'"></div>
-            <h3>RANGA VIP</h3>
-            <p>Dostęp do /fly i zestawu VIP</p>
-            <span class="price-tag">14.99 ZŁ</span>
-            <button class="buy-btn" onclick="addToCart('RANGA VIP', 14.99)">DODAJ DO KOSZYKA</button>
+            <span class="value-tag">WARTOŚĆ 200 ZŁ</span>
+            <h3>PAKIET BOGACZA</h3>
+            <p style="color:#666; font-size:0.9rem;">• 16x LUX KLUCZ<br>• 24x EPICKI KLUCZ</p>
+            <button class="buy-btn" onclick="addToCart('PAKIET BOGACZA', 159.99)">159.99 ZŁ</button>
         </div>
-        <!-- LUX -->
         <div class="item-card">
-            <div class="item-img-box"><img src="lux.png" style="width:120px;" onerror="this.parentElement.innerHTML='OBRAZEK LUX'"></div>
-            <h3>RANGA LUX</h3>
-            <p>Najlepsza ranga na serwerze</p>
-            <span class="price-tag">59.99 ZŁ</span>
-            <button class="buy-btn" onclick="addToCart('RANGA LUX', 59.99)">DODAJ DO KOSZYKA</button>
+            <span class="value-tag">WARTOŚĆ 150 ZŁ</span>
+            <h3>DUŻY PAKIET KLUCZY</h3>
+            <p style="color:#666; font-size:0.9rem;">• 10x LUX KLUCZ<br>• 16x EPICKI KLUCZ</p>
+            <button class="buy-btn" onclick="addToCart('DUŻY PAKIET KLUCZY', 99.99)">99.99 ZŁ</button>
         </div>
-        <!-- KLUCZE -->
-        <div class="item-card">
-            <div class="item-img-box"><img src="klucze.png" style="width:120px;" onerror="this.parentElement.innerHTML='OBRAZEK KLUCZE'"></div>
-            <h3>3x KLUCZ LUX</h3>
-            <p>Otwórz legendarne skrzynie</p>
-            <span class="price-tag">9.99 ZŁ</span>
-            <button class="buy-btn" onclick="addToCart('3x KLUCZ LUX', 9.99)">DODAJ DO KOSZYKA</button>
-        </div>
-        <!-- UNBAN -->
-        <div class="item-card">
-            <div class="item-img-box"><img src="unban.png" style="width:120px;" onerror="this.parentElement.innerHTML='OBRAZEK UNBAN'"></div>
-            <h3>UNBAN</h3>
-            <p>Powrót do gry natychmiast</p>
-            <span class="price-tag">19.99 ZŁ</span>
-            <button class="buy-btn" onclick="addToCart('UNBAN', 19.99)">DODAJ DO KOSZYKA</button>
-        </div>
+    </div>
+
+    <h2 class="section-title">🔑 Klucze</h2>
+    <div class="grid-items">
+        <div class="item-card"><h3>LUX KLUCZ</h3><button class="buy-btn" onclick="addToCart('LUX KLUCZ', 19.99)">19.99 ZŁ</button></div>
+        <div class="item-card"><h3>KLUCZ PETÓW</h3><button class="buy-btn" onclick="addToCart('KLUCZ PETÓW', 14.99)">14.99 ZŁ</button></div>
+        <div class="item-card"><h3>EPICKI KLUCZ</h3><button class="buy-btn" onclick="addToCart('EPICKI KLUCZ', 4.99)">4.99 ZŁ</button></div>
+        <div class="item-card"><h3>RZADKI KLUCZ</h3><button class="buy-btn" onclick="addToCart('RZADKI KLUCZ', 1.99)">1.99 ZŁ</button></div>
     </div>
 </div>
 
-<section class="discord-section">
-    <div class="discord-content">
-        <img src="ludzik discord.png" class="ludzik-img">
-        <div class="discord-info">
-            <h2 style="margin:0">DOŁĄCZ DO NAS</h2>
-            <span id="discord-count" class="members-count">...</span>
-            <span style="color: #00a2ff; font-weight: 900; text-transform: uppercase;">Graczy online</span><br>
-            <a href="https://discord.gg/YCGZD43BVA" target="_blank" class="join-btn">WEJDŹ NA DISCORDA</a>
-        </div>
+<footer>&copy; 2026 LUXHC.PL - Wszelkie prawa zastrzeżone.</footer>
+
+<div id="details-overlay" onclick="hideDetails()">
+    <div class="details-card" onclick="event.stopPropagation()">
+        <h3 style="color:var(--lux-purple);">📦 PAKIET LUX ZAWIERA:</h3>
+        <ul style="list-style:none; padding:0; font-weight:bold; text-align:left; line-height:1.8;">
+            <li>⭐ Ranga LUX (30 dni)</li>
+            <li>🔑 1x LUX KLUCZ</li>
+            <li>🔑 2x EPICKI KLUCZ</li>
+            <li>🔑 6x RZADKI KLUCZ</li>
+        </ul>
+        <div style="background:#000; color:white; padding:10px; border-radius:10px; margin-top:10px;">Wartość: 101.90 zł</div>
     </div>
-</section>
+</div>
 
-<footer>&copy; 2026 LUXHC.PL - Najlepsza Anarchia w Polsce</footer>
-
-<div id="toast">POWIADOMIENIE</div>
+<div id="toast">DODANO DO KOSZYKA!</div>
 
 <script>
-    const SERVER_ID = "1481567847137153097"; 
-
-    async function fetchDiscord() {
-        try {
-            const r = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
-            const d = await r.json();
-            document.getElementById('discord-count').innerText = d.presence_count;
-        } catch (e) {
-            document.getElementById('discord-count').innerText = "WIELE";
-        }
-    }
-    fetchDiscord();
-    setInterval(fetchDiscord, 30000);
-
     let cart = [];
-    function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
-    
+
     function addToCart(name, price) {
-        cart.push({ name, price });
-        updateCartUI();
-        showToast(`🛒 DODANO: ${name}`);
+        cart.push({ id: Date.now(), name, price });
+        updateCart();
+        showToast("🛒 DODANO DO KOSZYKA!");
     }
 
-    function updateCartUI() {
-        const list = document.getElementById('cart-list');
+    function updateCart() {
+        const list = document.getElementById('cart-items-list');
         const dot = document.getElementById('cart-dot');
-        const totalEl = document.getElementById('total-price');
-        dot.style.display = cart.length > 0 ? 'inline-block' : 'none';
+        const totalEl = document.getElementById('cart-total-price');
+        
+        if(cart.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Koszyk jest pusty...</p>';
+            dot.style.display = 'none';
+            totalEl.innerText = '0 ZŁ';
+            return;
+        }
+
+        dot.style.display = 'block';
         dot.innerText = cart.length;
+        list.innerHTML = '';
         let total = 0;
-        list.innerHTML = "";
-        cart.forEach((item, index) => {
+        cart.forEach(item => {
             total += item.price;
-            list.innerHTML += `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:#f9f9f9; padding:15px; border-radius:12px; margin-bottom:10px;">
-                    <div><b style="font-size:0.9rem;">${item.name}</b><br><span style="color:var(--main-blue); font-weight:900;">${item.price} ZŁ</span></div>
-                    <span onclick="removeItem(${index})" style="cursor:pointer; color:#ff4d4d; font-weight:900; font-size:0.8rem;">USUŃ</span>
-                </div>`;
+            list.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee; align-items:center;">
+                <div style="text-align:left;"><b>${item.name}</b><br><small>${item.price.toFixed(2)} zł</small></div>
+                <span onclick="removeItem(${item.id})" style="color:red; cursor:pointer; font-weight:900;">&times;</span>
+            </div>`;
         });
-        totalEl.innerText = total.toFixed(2) + " ZŁ";
+        totalEl.innerText = total.toFixed(2) + ' ZŁ';
     }
 
-    function removeItem(index) {
-        cart.splice(index, 1);
-        updateCartUI();
+    function removeItem(id) {
+        cart = cart.filter(i => i.id !== id);
+        updateCart();
+    }
+
+    function openCart() { document.getElementById('cart-sidebar').classList.add('active'); }
+    function closeCart() { document.getElementById('cart-sidebar').classList.remove('active'); }
+
+    function checkout() {
+        if(cart.length === 0) return showToast("❌ KOSZYK JEST PUSTY!");
+        const items = cart.map(i => i.name).join(', ');
+        const total = document.getElementById('cart-total-price').innerText;
+        const msg = `ZAMÓWIENIE: ${items}. SUMA: ${total}`;
+        
+        navigator.clipboard.writeText(msg).then(() => {
+            showToast("📋 SKOPIOWANO ZAMÓWIENIE!");
+            setTimeout(() => window.open('https://discord.gg/YCGZD43BVA', '_blank'), 1000);
+        });
     }
 
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.innerText = msg;
         t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 3000);
+        setTimeout(() => t.classList.remove('show'), 2500);
     }
 
     function copyIP() {
         navigator.clipboard.writeText("LUXHC.PL");
-        showToast("✅ SKOPIOWANO IP!");
+        showToast("✅ SKOPIOWANO IP: LUXHC.PL");
     }
 
-    function checkout() {
-        if(cart.length === 0) return showToast("TWÓJ KOSZYK JEST PUSTY!");
-        window.open('https://discord.gg/YCGZD43BVA', '_blank');
-    }
+    function showDetails() { document.getElementById('details-overlay').style.display = 'flex'; }
+    function hideDetails() { document.getElementById('details-overlay').style.display = 'none'; }
 </script>
 
 </body>
