@@ -8,24 +8,35 @@
     <style>
         :root {
             --main-blue: #00a2ff;
-            --discord: #5865F2;
+            --discord-color: #5865F2;
             --green-shop: #2eff8c;
             --social-pink: #ff4db8;
             --lux-purple: #9c27b0;
             --yellow-btn: #ffcc00;
-            --light-blue: #5ba6ff;
         }
 
+        /* --- ANIMACJE --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-25px); }
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
         }
 
-        body { background-color: #f8faf9; font-family: 'Poppins', sans-serif; margin: 0; scroll-behavior: smooth; overflow-x: hidden; }
+        body { 
+            background-color: #f8faf9; 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden; 
+        }
 
         /* --- NAWIGACJA --- */
         .header-nav { 
@@ -33,88 +44,133 @@
             font-weight: 900; text-transform: uppercase; align-items: center; position: sticky;
             top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
-        .header-nav a { text-decoration: none; color: #333; transition: 0.3s; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+        .header-nav a { text-decoration: none; color: #333; transition: 0.3s; cursor: pointer; font-size: 0.9rem; }
         .header-nav a:hover { color: var(--main-blue); }
 
-        /* --- HERO SECTION (USUNIĘTE SZARE, ZOSTAŁO BŁĘKITNE) --- */
-        .landing-page { 
-            display: flex; justify-content: center; align-items: center; padding: 60px 20px; 
-            background: white; 
+        /* --- HERO SECTION (TYLKO BŁĘKITNY BANER) --- */
+        .hero-container {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            background: white;
         }
 
         .hero-box {
-            background-image: url('tlo.png'); 
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('tlo.png'); 
             background-size: cover; 
             background-position: center;
-            border-radius: 35px; 
+            border-radius: 40px; 
             width: 100%;
-            max-width: 1100px;
-            padding: 80px 40px; 
+            max-width: 1200px;
+            padding: 100px 40px; 
             text-align: center; 
             color: white;
             display: flex; 
             flex-direction: column; 
-            justify-content: center; 
             align-items: center;
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
             animation: fadeInUp 0.8s ease-out;
-            position: relative;
         }
 
-        .hero-box img { width: 160px; margin-bottom: 20px; animation: float 4s infinite ease-in-out; }
-        .hero-box h1 { font-size: 4.5rem; margin: 10px 0; font-weight: 900; letter-spacing: 2px; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .hero-box img { width: 180px; margin-bottom: 20px; }
+        .hero-box h1 { font-size: 4.5rem; margin: 10px 0; font-weight: 900; text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
         .ip-btn { 
-            background: var(--light-blue); color: white; border: none; padding: 18px 50px; 
-            border-radius: 15px; font-weight: 900; font-size: 1.3rem; cursor: pointer;
+            background: #5ba6ff; color: white; border: none; padding: 20px 60px; 
+            border-radius: 20px; font-weight: 900; font-size: 1.5rem; cursor: pointer;
             transition: 0.4s; box-shadow: 0 10px 25px rgba(91, 166, 255, 0.4);
             margin-top: 20px;
         }
         .ip-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        /* --- SKLEP I RESZTA --- */
-        .container { max-width: 1100px; margin: 60px auto; width: 95%; opacity: 0; transform: translateY(30px); transition: 1s; }
-        .container.visible { opacity: 1; transform: translateY(0); }
+        /* --- SEKCJA DISCORD (Z ANIMOWANYM LUDZIKIEM) --- */
+        .discord-section {
+            background: #0f1113;
+            padding: 100px 0;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-        .section-title { text-align: center; margin-bottom: 40px; text-transform: uppercase; font-weight: 900; font-size: 2.2rem; color: #222; }
+        .discord-wrapper {
+            max-width: 1100px;
+            width: 90%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
 
-        .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .item-card { background: white; padding: 30px; border-radius: 25px; border: 1px solid #eee; text-align: center; transition: 0.3s; }
-        .item-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .discord-character {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 300px;
+        }
+
+        .discord-character img {
+            width: 100%;
+            max-width: 380px;
+            animation: float 4s infinite ease-in-out; /* Latanie ludzika */
+        }
+
+        .discord-content {
+            flex: 1;
+            color: white;
+            min-width: 300px;
+        }
+
+        .discord-content h2 { font-size: 2.8rem; font-weight: 900; margin: 0; line-height: 1.1; }
+        .discord-content p { color: #888; margin: 15px 0 40px; font-size: 1.1rem; }
+
+        .discord-counter { margin-bottom: 40px; }
+        .count-num { font-size: 4rem; font-weight: 900; display: block; line-height: 1; }
+        .count-label { color: var(--discord-color); font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+
+        .join-btn {
+            background: white; color: black; padding: 18px 50px; border-radius: 12px;
+            text-decoration: none; font-weight: 900; display: inline-flex; align-items: center; gap: 12px;
+            transition: 0.3s; font-size: 1.1rem;
+        }
+        .join-btn:hover { background: var(--discord-color); color: white; transform: translateY(-5px); }
+
+        /* --- SKLEP --- */
+        .container { max-width: 1200px; margin: 80px auto; width: 95%; }
+        .section-title { text-align: center; margin-bottom: 50px; font-weight: 900; font-size: 2.5rem; }
+        
+        .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .item-card { background: white; padding: 40px; border-radius: 30px; border: 1px solid #eee; text-align: center; transition: 0.4s; }
+        .item-card:hover { transform: translateY(-10px); border-color: var(--main-blue); }
 
         .buy-btn { 
-            background: var(--yellow-btn); border: none; width: 100%; padding: 15px; 
-            font-weight: 900; cursor: pointer; border-radius: 12px; margin-top: 20px;
-            font-size: 1rem; transition: 0.3s;
+            background: var(--yellow-btn); border: none; width: 100%; padding: 18px; 
+            font-weight: 900; cursor: pointer; border-radius: 15px; margin-top: 25px;
+            font-size: 1.1rem; animation: pulse-gold 2s infinite;
         }
-        .buy-btn:hover { filter: brightness(1.05); }
 
-        /* --- KOSZYK I TOAST --- */
-        #toast { visibility: hidden; background: #111; color: #fff; padding: 15px 30px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 7000; font-weight: 900; }
-        #toast.show { visibility: visible; animation: fadeInUp 0.4s; }
-
-        footer { text-align: center; padding: 60px 0; color: #bbb; font-size: 0.9rem; font-weight: 700; }
-
+        /* --- KOSZYK --- */
         #cart-sidebar {
             position: fixed; top: 0; right: -400px; width: 350px; height: 100vh;
             background: white; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 5000;
             transition: 0.4s; padding: 30px; display: flex; flex-direction: column;
         }
         #cart-sidebar.active { right: 0; }
+        #toast { visibility: hidden; background: #111; color: #fff; padding: 20px 40px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 7000; font-weight: 900; }
+        #toast.show { visibility: visible; animation: fadeInUp 0.4s; }
+
+        footer { text-align: center; padding: 80px 0; color: #bbb; font-weight: 900; }
     </style>
 </head>
 <body>
 
 <nav class="header-nav">
     <a href="#shop">SKLEP</a>
-    <img src="image_efc264.png" height="40">
+    <img src="image_efc264.png" height="45">
     <a onclick="openCart()">KOSZYK</a>
-    <a href="https://discord.gg/YCGZD43BVA" target="_blank" style="color:var(--discord)">
-        <span>💬</span> DISCORD <!-- Tu jest Twój "Ludzik/Ikona" -->
-    </a>
+    <a href="#discord">SPOŁECZNOŚĆ</a>
 </nav>
 
-<section class="landing-page">
+<section class="hero-container">
     <div class="hero-box">
         <img src="image_efc264.png">
         <h1>LUXHC.PL</h1>
@@ -122,40 +178,80 @@
     </div>
 </section>
 
+<!-- SEKCJA DISCORD Z LUDZIKIEM -->
+<section id="discord" class="discord-section">
+    <div class="discord-wrapper">
+        <div class="discord-character">
+            <!-- Twój plik z ludzikiem -->
+            <img src="ludzik discord.png" alt="Discord Mascot">
+        </div>
+        <div class="discord-content">
+            <h2>ODWIEDŹ NASZ SERWER DISCORD</h2>
+            <p>Aby być ze wszystkim na bieżąco i odbierać nagrody!</p>
+            
+            <div class="discord-counter">
+                <span class="count-num">40</span>
+                <span class="count-label">Użytkowników Online</span>
+            </div>
+
+            <a href="https://discord.gg/YCGZD43BVA" target="_blank" class="join-btn">
+                DOŁĄCZ TERAZ ➔
+            </a>
+        </div>
+    </div>
+</section>
+
 <div id="shop" class="container">
-    <h2 class="section-title">🛒 DOSTĘPNE PAKIETY</h2>
+    <h2 class="section-title">🛒 NASZA OFERTA</h2>
     <div class="grid-items">
-        <div class="item-card"><h3>VIP</h3><p>Ranga na 30 dni</p><button class="buy-btn" onclick="addToCart('VIP', 14.99)">14.99 ZŁ</button></div>
-        <div class="item-card"><h3>SVIP</h3><p>Ranga na 30 dni</p><button class="buy-btn" onclick="addToCart('SVIP', 39.99)">39.99 ZŁ</button></div>
-        <div class="item-card"><h3>LUX</h3><p>Stała ranga Premium</p><button class="buy-btn" onclick="addToCart('LUX', 59.99)">59.99 ZŁ</button></div>
+        <div class="item-card">
+            <h3>VIP (30 DNI)</h3>
+            <p>Dostęp do /kit vip i więcej!</p>
+            <button class="buy-btn" onclick="addToCart('VIP', 14.99)">14.99 ZŁ</button>
+        </div>
+        <div class="item-card">
+            <h3>SVIP (30 DNI)</h3>
+            <p>Pisanie kolorami i większy drop!</p>
+            <button class="buy-btn" onclick="addToCart('SVIP', 39.99)">39.99 ZŁ</button>
+        </div>
+        <div class="item-card" style="border-color: var(--main-blue);">
+            <h3>RANGA LUX</h3>
+            <p>Najlepsza ranga na zawsze!</p>
+            <button class="buy-btn" onclick="addToCart('LUX', 59.99)">59.99 ZŁ</button>
+        </div>
     </div>
 </div>
 
 <div id="cart-sidebar">
-    <h2 style="font-weight:900;">TWÓJ KOSZYK</h2>
-    <div id="cart-items-list" style="flex:1;"></div>
-    <button class="buy-btn" style="background:var(--discord); color:white;" onclick="checkout()">FINALIZUJ NA DISCORDZIE</button>
-    <button class="buy-btn" style="background:#eee; color:#333;" onclick="closeCart()">ZAMKNIJ</button>
+    <h2 style="font-weight:900;">TWOJE ZAKUPY</h2>
+    <div id="cart-list" style="flex:1;">
+        <p style="color:#999; text-align:center; margin-top:50px;">Koszyk jest pusty...</p>
+    </div>
+    <button class="buy-btn" style="background:var(--discord-color); color:white;" onclick="checkout()">FINALIZUJ</button>
+    <button class="buy-btn" style="background:#f0f0f0; color:#333; animation:none;" onclick="closeCart()">ZAMKNIJ</button>
 </div>
 
 <footer>&copy; 2026 LUXHC.PL - OFICJALNY SKLEP SERWERA</footer>
 
-<div id="toast">SKOPIOWANO!</div>
+<div id="toast">🛒 DODANO!</div>
 
 <script>
     let cart = [];
 
     function addToCart(name, price) {
         cart.push({name, price});
-        showToast("DODANO: " + name);
         updateCart();
+        showToast("🛒 DODANO DO KOSZYKA!");
         openCart();
     }
 
     function updateCart() {
-        const list = document.getElementById('cart-items-list');
-        list.innerHTML = cart.length === 0 ? '<p>Koszyk jest pusty</p>' : 
-            cart.map(item => `<div style="padding:10px 0; border-bottom:1px solid #eee;"><b>${item.name}</b> - ${item.price} zł</div>`).join('');
+        const list = document.getElementById('cart-list');
+        if(cart.length === 0) {
+            list.innerHTML = '<p>Koszyk jest pusty...</p>';
+            return;
+        }
+        list.innerHTML = cart.map(i => `<div style="padding:10px 0; border-bottom:1px solid #eee;"><b>${i.name}</b> - ${i.price} zł</div>`).join('');
     }
 
     function openCart() { document.getElementById('cart-sidebar').classList.add('active'); }
@@ -167,10 +263,7 @@
     }
 
     function checkout() {
-        if(cart.length === 0) return alert("Koszyk jest pusty!");
-        const txt = "ZAMÓWIENIE: " + cart.map(i => i.name).join(", ");
-        navigator.clipboard.writeText(txt);
-        alert("Skopiowano zamówienie do schowka! Teraz wklej je na naszym kanale Discord.");
+        if(cart.length === 0) return alert("Pusty koszyk!");
         window.open('https://discord.gg/YCGZD43BVA', '_blank');
     }
 
@@ -180,13 +273,6 @@
         t.classList.add('show');
         setTimeout(() => t.classList.remove('show'), 2000);
     }
-
-    window.addEventListener('scroll', () => {
-        const shop = document.getElementById('shop');
-        if (shop.getBoundingClientRect().top < window.innerHeight - 50) {
-            shop.classList.add('visible');
-        }
-    });
 </script>
 
 </body>
