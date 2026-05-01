@@ -14,6 +14,7 @@
             --svip-orange: #ff9800;
             --lux-blue: #00b0ff;
             --pakiet-purple: #f3e5f5;
+            --bg-dark: #0f1113;
         }
 
         /* --- ANIMACJE --- */
@@ -23,7 +24,7 @@
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
 
         body { 
@@ -31,6 +32,7 @@
             font-family: 'Poppins', sans-serif; 
             margin: 0; 
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         /* --- NAWIGACJA --- */
@@ -39,118 +41,152 @@
             font-weight: 900; text-transform: uppercase; align-items: center; position: sticky;
             top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
-        .header-nav a { text-decoration: none; color: #333; transition: 0.3s; font-size: 0.9rem; }
+        .header-nav a { text-decoration: none; color: #333; transition: 0.3s; font-size: 0.85rem; cursor: pointer; }
         .header-nav a:hover { color: var(--main-blue); }
-
-        /* --- HERO --- */
-        .hero-container { padding: 40px 20px; display: flex; justify-content: center; }
-        .hero-box {
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('tlo.png'); 
-            background-size: cover; background-position: center; border-radius: 40px; 
-            width: 100%; max-width: 1200px; padding: 80px 40px; text-align: center; color: white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-        }
-        .hero-box h1 { font-size: 4rem; margin: 0; font-weight: 900; }
-        .ip-btn { 
-            background: #5ba6ff; color: white; border: none; padding: 15px 50px; 
-            border-radius: 15px; font-weight: 900; font-size: 1.3rem; cursor: pointer; margin-top: 20px;
+        
+        .cart-counter {
+            background: var(--main-blue); color: white; padding: 2px 8px; border-radius: 50%; font-size: 0.7rem; margin-left: 5px;
         }
 
-        /* --- SKLEP 1:1 --- */
+        /* --- HERO (Z TWOJEGO SCREENA) --- */
+        .hero-section {
+            display: flex; justify-content: center; padding: 40px 20px; background: white;
+        }
+        .hero-card {
+            width: 100%; max-width: 800px; background: #ccc; border-radius: 30px; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1); position: relative;
+        }
+        .hero-banner {
+            width: 100%; display: block;
+        }
+        .hero-content {
+            position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; color: white;
+        }
+        .hero-ip-text { font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .ip-copy-btn {
+            background: #5ba6ff; border: none; color: white; padding: 12px 40px; border-radius: 12px;
+            font-weight: 900; font-size: 1rem; cursor: pointer; transition: 0.3s;
+        }
+        .ip-copy-btn:hover { transform: scale(1.05); background: var(--main-blue); }
+
+        /* --- KOSZYK SIDEBAR --- */
+        #cart-sidebar {
+            position: fixed; top: 0; right: -400px; width: 350px; height: 100vh;
+            background: white; box-shadow: -10px 0 40px rgba(0,0,0,0.15); z-index: 2000;
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 30px; display: flex; flex-direction: column;
+        }
+        #cart-sidebar.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; margin-bottom: 20px; }
+        .cart-items { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .cart-item-info b { font-size: 0.9rem; display: block; }
+        .cart-item-info span { font-size: 0.8rem; color: #888; }
+        .remove-item { color: #ff4d4d; cursor: pointer; font-size: 0.8rem; font-weight: 700; }
+        .cart-footer { padding-top: 20px; }
+        .total-price { display: flex; justify-content: space-between; font-weight: 900; font-size: 1.2rem; margin-bottom: 20px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 1500; }
+
+        /* --- SKLEP (TABELA I PAKIETY) --- */
         .container { max-width: 1100px; margin: 60px auto; width: 95%; }
-        .section-title { text-align: center; margin: 40px 0; font-weight: 900; font-size: 2rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
-
-        /* TABELA PORÓWNANIA */
-        .shop-wrapper { 
-            background: white; border-radius: 30px; overflow: hidden; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-        .rank-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .section-title { text-align: center; margin: 40px 0; font-weight: 900; font-size: 2rem; }
+        
+        .shop-wrapper { background: white; border-radius: 30px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .rank-table { width: 100%; border-collapse: collapse; }
         .rank-table th, .rank-table td { padding: 15px; text-align: center; border-bottom: 1px solid #f0f0f0; font-size: 0.85rem; font-weight: 700; }
-        
         .cechy-col { text-align: left !important; padding-left: 30px !important; color: #666; background: #fafafa; width: 25%; }
+        .th-rank { padding: 25px 10px !important; }
+        .price-tag { background: rgba(255,255,255,0.4); border: 2px solid rgba(0,0,0,0.1); padding: 5px; border-radius: 10px; display: block; margin-top: 10px; font-weight: 900; }
         
-        .th-rank { padding: 25px 10px !important; color: black; }
-        .price-tag { 
-            background: rgba(255,255,255,0.4); border: 2px solid rgba(0,0,0,0.1); 
-            padding: 8px 5px; border-radius: 10px; display: block; margin-top: 10px; font-weight: 900;
-        }
-
         .th-vip { background: var(--vip-yellow); }
         .th-svip { background: var(--svip-orange); color: white; }
         .th-lux { background: var(--lux-blue); color: white; }
         .th-pakiet { background: var(--pakiet-purple); border: 2px solid #e1bee7; }
 
-        .check { color: #2ecc71; font-size: 1.2rem; }
-        .cross { color: #e74c3c; font-size: 1.2rem; }
-
-        /* PAKIETY BOGACZA & KLUCZE */
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
         .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
-
-        .card { 
-            background: white; border-radius: 25px; padding: 30px; text-align: center; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1px solid #eee;
-            position: relative;
-        }
+        .card { background: white; border-radius: 25px; padding: 30px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1px solid #eee; position: relative; }
         .val-text { color: #bbb; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        .card h3 { margin: 5px 0; font-weight: 900; font-size: 1.1rem; text-transform: uppercase; }
-        .card ul { list-style: none; padding: 0; margin: 15px 0; color: #888; font-size: 0.8rem; font-weight: 700; }
+        
+        .buy-btn-small { background: var(--yellow-btn); border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: 900; cursor: pointer; transition: 0.3s; }
 
-        .buy-btn-small {
-            background: var(--yellow-btn); border: none; width: 100%; padding: 12px;
-            border-radius: 12px; font-weight: 900; cursor: pointer; transition: 0.3s;
+        /* --- SOCIAL MEDIA --- */
+        .socials-section { background: #f0f2f5; padding: 60px 0; text-align: center; }
+        .socials-grid { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+        .social-item { 
+            background: white; padding: 20px 40px; border-radius: 20px; text-decoration: none; color: #333; 
+            font-weight: 900; display: flex; align-items: center; gap: 15px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-        .buy-btn-small:hover { transform: scale(1.03); }
+        .social-item:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .social-icon { width: 30px; height: 30px; }
 
         /* --- DISCORD --- */
-        .discord-section { background: #0f1113; padding: 80px 0; display: flex; justify-content: center; }
+        .discord-section { background: var(--bg-dark); padding: 80px 0; display: flex; justify-content: center; overflow: hidden; }
         .discord-character img { width: 320px; animation: float 4s infinite ease-in-out; }
         .join-btn { background: white; color: black; padding: 15px 40px; border-radius: 10px; text-decoration: none; font-weight: 900; transition: 0.3s; }
         .join-btn:hover { background: var(--discord-color); color: white; }
 
-        footer { text-align: center; padding: 40px; color: #bbb; font-size: 0.8rem; font-weight: 700; }
+        footer { text-align: center; padding: 40px; color: #bbb; font-size: 0.8rem; font-weight: 700; background: white; }
         #toast { visibility: hidden; background: #111; color: #fff; padding: 15px 30px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 7000; font-weight: 900; font-size: 0.8rem; }
         #toast.show { visibility: visible; animation: fadeInUp 0.4s; }
     </style>
 </head>
 <body>
 
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
 <nav class="header-nav">
     <a href="#shop">SKLEP</a>
     <img src="image_efc264.png" height="40">
+    <a onclick="toggleCart()">KOSZYK <span class="cart-counter" id="cart-count">0</span></a>
     <a href="#discord">SPOŁECZNOŚĆ</a>
 </nav>
 
-<section class="hero-container">
-    <div class="hero-box">
-        <img src="image_efc264.png">
-        <h1>LUXHC.PL</h1>
-        <button class="ip-btn" onclick="copyIP()">IP: LUXHC.PL</button>
+<!-- KOSZYK SIDEBAR -->
+<div id="cart-sidebar">
+    <div class="cart-header">
+        <h2 style="margin:0; font-weight:900; font-size:1.3rem;">TWÓJ KOSZYK</h2>
+        <span onclick="toggleCart()" style="cursor:pointer; font-size:1.5rem;">&times;</span>
+    </div>
+    <div class="cart-items" id="cart-items-list">
+        <!-- Przedmioty będą tu dodawane przez JS -->
+    </div>
+    <div class="cart-footer">
+        <div class="total-price">
+            <span>RAZEM:</span>
+            <span id="total-amount">0.00 ZŁ</span>
+        </div>
+        <button class="buy-btn-small" style="padding:18px; font-size:1rem;" onclick="checkout()">FINALIZUJ ZAKUP</button>
+    </div>
+</div>
+
+<section class="hero-section">
+    <div class="hero-card">
+        <!-- Tutaj wstawiasz swój obrazek główny tła -->
+        <img src="image_efc264.png" class="hero-banner" alt="Banner">
+        <div class="hero-content">
+            <div class="hero-ip-text">LUXHC.PL</div>
+            <button class="ip-copy-btn" onclick="copyIP()">IP: LUXHC.PL</button>
+        </div>
     </div>
 </section>
 
 <div id="shop" class="container">
-    
     <h2 class="section-title">🏆 PORÓWNANIE RANG</h2>
     <div class="shop-wrapper">
         <table class="rank-table">
             <thead>
                 <tr>
                     <th class="cechy-col">CECHY</th>
-                    <th class="th-rank th-vip">VIP <span class="price-tag">14.99 ZŁ</span></th>
-                    <th class="th-rank th-svip">SVIP <span class="price-tag">39.99 ZŁ</span></th>
-                    <th class="th-rank th-lux">LUX <span class="price-tag">59.99 ZŁ</span></th>
-                    <th class="th-rank th-pakiet">PAKIET LUX <span class="price-tag">69.99 ZŁ</span></th>
+                    <th class="th-rank th-vip">VIP <span class="price-tag" onclick="addToCart('Ranga VIP', 14.99)">14.99 ZŁ</span></th>
+                    <th class="th-rank th-svip">SVIP <span class="price-tag" onclick="addToCart('Ranga SVIP', 39.99)">39.99 ZŁ</span></th>
+                    <th class="th-rank th-lux">LUX <span class="price-tag" onclick="addToCart('Ranga LUX', 59.99)">59.99 ZŁ</span></th>
+                    <th class="th-rank th-pakiet">PAKIET LUX <span class="price-tag" onclick="addToCart('Pakiet LUX', 69.99)">69.99 ZŁ</span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr><td class="cechy-col">Zestaw (Kit)</td><td>VIP</td><td>SVIP</td><td>LUX</td><td>LUX</td></tr>
                 <tr><td class="cechy-col">Ilość sethome</td><td>2</td><td>3</td><td>5</td><td>5</td></tr>
-                <tr><td class="cechy-col">Mnożnik Dropu</td><td>1.2x</td><td>1.5x</td><td>2.0x</td><td>2.0x</td></tr>
-                <tr><td class="cechy-col">Pisanie Kolorami</td><td class="cross">✘</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
-                <tr><td class="cechy-col">Komenda /repair</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
-                <tr><td class="cechy-col">Komenda /ec</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td><td class="check">✔</td></tr>
+                <tr><td class="cechy-col">Pisanie Kolorami</td><td style="color:#e74c3c">✘</td><td style="color:#2ecc71">✔</td><td style="color:#2ecc71">✔</td><td style="color:#2ecc71">✔</td></tr>
             </tbody>
         </table>
     </div>
@@ -160,55 +196,39 @@
         <div class="card">
             <span class="val-text">WARTOŚĆ 200 ZŁ</span>
             <h3>PAKIET BOGACZA</h3>
-            <ul>
-                <li>• 16x LUX KLUCZ</li>
-                <li>• 24x EPICKI KLUCZ</li>
-            </ul>
             <button class="buy-btn-small" onclick="addToCart('Pakiet Bogacza', 159.99)">159.99 ZŁ</button>
         </div>
         <div class="card">
             <span class="val-text">WARTOŚĆ 150 ZŁ</span>
             <h3>DUŻY PAKIET KLUCZY</h3>
-            <ul>
-                <li>• 10x LUX KLUCZ</li>
-                <li>• 16x EPICKI KLUCZ</li>
-            </ul>
             <button class="buy-btn-small" onclick="addToCart('Duży Pakiet Kluczy', 99.99)">99.99 ZŁ</button>
         </div>
     </div>
-
-    <h2 class="section-title">🔑 KLUCZE</h2>
-    <div class="grid-3" style="grid-template-columns: repeat(4, 1fr);">
-        <div class="card">
-            <h3>LUX KLUCZ</h3>
-            <div style="height: 30px;"></div>
-            <button class="buy-btn-small" onclick="addToCart('LUX Klucz', 19.99)">19.99 ZŁ</button>
-        </div>
-        <div class="card">
-            <h3>KLUCZ PETÓW</h3>
-            <div style="height: 30px;"></div>
-            <button class="buy-btn-small" onclick="addToCart('Klucz Petów', 14.99)">14.99 ZŁ</button>
-        </div>
-        <div class="card">
-            <h3>EPICKI KLUCZ</h3>
-            <div style="height: 30px;"></div>
-            <button class="buy-btn-small" onclick="addToCart('Epicki Klucz', 4.99)">4.99 ZŁ</button>
-        </div>
-        <div class="card">
-            <h3>RZADKI KLUCZ</h3>
-            <div style="height: 30px;"></div>
-            <button class="buy-btn-small" onclick="addToCart('Rzadki Klucz', 1.99)">1.99 ZŁ</button>
-        </div>
-    </div>
 </div>
+
+<!-- NASZE SOCIAL MEDIA -->
+<section class="socials-section">
+    <h2 style="font-weight: 900; font-size: 2rem;">NASZE SOCIAL MEDIA</h2>
+    <div class="socials-grid">
+        <a href="#" class="social-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174876.png" class="social-icon"> TikTok
+        </a>
+        <a href="#" class="social-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="social-icon"> YouTube
+        </a>
+        <a href="#" class="social-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="social-icon"> Instagram
+        </a>
+    </div>
+</section>
 
 <section id="discord" class="discord-section">
     <div style="max-width: 1100px; width: 90%; display: flex; align-items: center; gap: 50px; flex-wrap: wrap; justify-content: center;">
         <div class="discord-character"><img src="ludzik discord.png"></div>
         <div style="color: white; text-align: center;">
-            <h2 style="font-size: 2.2rem; font-weight: 900;">DOŁĄCZ DO NAS</h2>
-            <p style="color: #888; margin-bottom: 30px;">Dołącz do 40 graczy online!</p>
-            <a href="https://discord.gg/YCGZD43BVA" class="join-btn">DISCORD SERWER ➔</a>
+            <h2 style="font-size: 2.2rem; font-weight: 900; margin:0;">DOŁĄCZ DO NAS</h2>
+            <p style="color: #888; margin-bottom: 30px;">Oficjalny serwer Discord społeczności LUXHC!</p>
+            <a href="https://discord.gg/YCGZD43BVA" class="join-btn">DOŁĄCZ DO DISCORDA ➔</a>
         </div>
     </div>
 </section>
@@ -218,13 +238,73 @@
 <div id="toast">🛒 DODANO DO KOSZYKA!</div>
 
 <script>
+    let cart = [];
+
+    function toggleCart() {
+        const sidebar = document.getElementById('cart-sidebar');
+        const overlay = document.getElementById('overlay');
+        sidebar.classList.toggle('active');
+        overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+    }
+
+    function addToCart(name, price) {
+        cart.push({ id: Date.now(), name, price });
+        updateCartUI();
+        showToast("🛒 DODANO: " + name);
+        if(!document.getElementById('cart-sidebar').classList.contains('active')) {
+            toggleCart();
+        }
+    }
+
+    function removeItem(id) {
+        cart = cart.filter(item => item.id !== id);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const list = document.getElementById('cart-items-list');
+        const count = document.getElementById('cart-count');
+        const totalDisplay = document.getElementById('total-amount');
+        
+        count.innerText = cart.length;
+        list.innerHTML = '';
+        
+        let total = 0;
+        
+        if(cart.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Twój koszyk jest pusty.</p>';
+        } else {
+            cart.forEach(item => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <b>${item.name}</b>
+                            <span>${item.price.toFixed(2)} ZŁ</span>
+                        </div>
+                        <div class="remove-item" onclick="removeItem(${item.id})">Usuń</div>
+                    </div>
+                `;
+            });
+        }
+        
+        totalDisplay.innerText = total.toFixed(2) + " ZŁ";
+    }
+
+    function checkout() {
+        if(cart.length === 0) {
+            alert("Najpierw dodaj coś do koszyka!");
+            return;
+        }
+        alert("Przekierowanie do płatności...");
+        // Tu można wpiąć system płatności
+    }
+
     function copyIP() {
         navigator.clipboard.writeText("LUXHC.PL");
-        showToast("🌐 SKOPIOWANO IP!");
+        showToast("🌐 SKOPIOWANO IP: LUXHC.PL");
     }
-    function addToCart(name, price) {
-        showToast("🛒 DODANO: " + name);
-    }
+
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.innerText = msg;
