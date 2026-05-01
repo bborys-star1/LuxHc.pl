@@ -8,7 +8,6 @@
     <style>
         :root {
             --main-blue: #00a2ff;
-            --bg-dark: #0e0e0e;
             --discord-blurple: #5865F2;
             --green-shop: #2eff8c;
             --social-pink: #ff4db8;
@@ -24,11 +23,6 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
-        }
 
         body { background-color: #f4f7f6; font-family: 'Poppins', sans-serif; margin: 0; scroll-behavior: smooth; overflow-x: hidden; }
 
@@ -41,98 +35,77 @@
         .header-nav a:hover { color: var(--main-blue); }
         #cart-dot { position: absolute; top: -10px; right: -15px; background: #ff4d4d; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; display: none; }
 
-        /* --- HERO SECTION --- */
-        .landing-page { padding: 60px 0; display: flex; justify-content: center; background: white; }
-        .main-hero-container { display: flex; gap: 20px; max-width: 1300px; width: 95%; align-items: stretch; height: 520px; }
+        /* --- WSPÓLNY STYL BOKSÓW Z TŁEM --- */
+        .box-with-bg {
+            background-image: url('tlo.png'); /* Tutaj Twój trzeci obrazek */
+            background-size: cover;
+            background-position: center;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-        /* BOX 1: LOGO */
+        /* --- HERO SECTION (GÓRA) --- */
+        .landing-page { padding: 60px 0; display: flex; justify-content: center; background: white; }
+        .main-hero-container { display: flex; gap: 20px; max-width: 1300px; width: 95%; height: 500px; }
+
         .hero-box {
-            background: var(--bg-dark); border-radius: 40px; flex: 1; padding: 40px; text-align: center; color: white;
+            flex: 2; padding: 40px; text-align: center; color: white;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15); animation: fadeInUp 0.8s ease-out;
         }
         .hero-box img { width: 140px; margin-bottom: 20px; }
-        .hero-box h1 { font-size: 3rem; margin: 10px 0; font-weight: 900; letter-spacing: 2px; }
-        .ip-btn { background: #4da6ff; color: white; border: none; padding: 15px 40px; border-radius: 15px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
-        .ip-btn:hover { transform: scale(1.05); background: #3d95ef; }
+        .hero-box h1 { font-size: 4rem; margin: 10px 0; font-weight: 900; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        .ip-btn { background: #4da6ff; color: white; border: none; padding: 15px 40px; border-radius: 15px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .ip-btn:hover { transform: scale(1.05); }
 
-        /* BOX 2: DISCORD (Z LUDZIKIEM) */
-        .discord-section {
-            flex: 1.6; background: #080808; border-radius: 40px; position: relative; overflow: hidden;
-            display: flex; align-items: center; padding: 40px; border: 1px solid #1a1a1a; animation: fadeInUp 1s ease-out;
-        }
-        .discord-content { position: relative; z-index: 5; display: flex; align-items: center; gap: 40px; width: 100%; }
-        .ludzik-img { width: 220px; animation: floatLudzik 3s infinite ease-in-out; filter: drop-shadow(0 15px 30px rgba(0, 162, 255, 0.2)); }
-        
-        .discord-info { color: white; text-align: left; }
-        .discord-info h2 { font-size: 1.8rem; margin: 0; font-weight: 900; line-height: 1.1; text-transform: uppercase; }
-        .discord-info p { color: #777; font-size: 0.9rem; margin: 10px 0 20px; }
-        .members-count { font-size: 4rem; font-weight: 900; line-height: 1; display: block; }
-        .members-label { color: var(--main-blue); font-weight: 900; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; }
-        
-        .join-btn {
-            background: white; color: black; padding: 16px 40px; border-radius: 15px;
-            text-decoration: none; font-weight: 900; display: inline-block; margin-top: 30px; transition: 0.3s;
-        }
-        .join-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
-        .discord-bg-text { position: absolute; font-size: 12rem; font-weight: 900; color: rgba(255,255,255,0.02); right: -20px; bottom: -40px; z-index: 1; pointer-events: none; text-transform: uppercase; }
-
-        /* BOX 3: BOCZNE PRZYCISKI */
-        .hero-side-btns { flex: 0.6; display: flex; flex-direction: column; gap: 20px; }
-        .side-btn { 
-            flex: 1; border-radius: 35px; display: flex; justify-content: center; align-items: center;
-            font-weight: 900; font-size: 1.5rem; text-decoration: none; transition: 0.4s; text-transform: uppercase;
-        }
+        .hero-side-btns { flex: 0.8; display: flex; flex-direction: column; gap: 20px; }
+        .side-btn { flex: 1; border-radius: 35px; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.5rem; text-decoration: none; transition: 0.4s; text-transform: uppercase; }
         .btn-shop { background: var(--green-shop); color: #000; }
         .btn-social { background: var(--social-pink); color: white; }
-        .side-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        /* --- KOSZYK --- */
-        #cart-sidebar {
-            position: fixed; top: 0; right: -450px; width: 400px; max-width: 100%; height: 100vh;
-            background: white; z-index: 5000; transition: 0.5s; padding: 40px; display: flex; flex-direction: column;
-            box-sizing: border-box; box-shadow: -15px 0 40px rgba(0,0,0,0.1);
-        }
-        #cart-sidebar.active { right: 0; }
-        #cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 4999; }
-
-        /* --- SKLEP --- */
+        /* --- SKLEP (ŚRODEK) --- */
         .container { max-width: 1200px; margin: 80px auto; width: 95%; }
         .section-title { text-align: center; font-weight: 900; font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; }
         .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .item-card { background: white; padding: 40px; border-radius: 35px; border: 1px solid #eee; text-align: center; transition: 0.4s; }
-        .item-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .buy-btn { 
-            background: var(--yellow-accent); border: none; width: 100%; padding: 18px; 
-            font-weight: 900; cursor: pointer; border-radius: 15px; margin-top: 20px; 
-            animation: pulse 2s infinite; text-transform: uppercase;
-        }
+        .buy-btn { background: var(--yellow-accent); border: none; width: 100%; padding: 18px; font-weight: 900; cursor: pointer; border-radius: 15px; margin-top: 20px; }
 
-        /* --- TOAST --- */
+        /* --- DISCORD (DÓŁ) --- */
+        .discord-section {
+            max-width: 1300px; width: 95%; margin: 50px auto; padding: 60px;
+            display: flex; align-items: center; position: relative; overflow: hidden;
+        }
+        .discord-content { display: flex; align-items: center; justify-content: center; gap: 80px; width: 100%; z-index: 5; }
+        .ludzik-img { width: 250px; animation: floatLudzik 3s infinite ease-in-out; }
+        .discord-info { color: white; }
+        .discord-info h2 { font-size: 2.5rem; margin: 0; font-weight: 900; text-transform: uppercase; }
+        .members-count { font-size: 5rem; font-weight: 900; line-height: 1; display: block; margin: 10px 0; }
+        .join-btn { background: white; color: black; padding: 18px 50px; border-radius: 20px; text-decoration: none; font-weight: 900; display: inline-block; margin-top: 20px; transition: 0.3s; }
+
+        /* --- KOSZYK I TOAST --- */
+        #cart-sidebar { position: fixed; top: 0; right: -450px; width: 400px; max-width: 100%; height: 100vh; background: white; z-index: 5000; transition: 0.5s; padding: 40px; display: flex; flex-direction: column; box-shadow: -15px 0 40px rgba(0,0,0,0.1); }
+        #cart-sidebar.active { right: 0; }
         #toast { visibility: hidden; background: #111; color: #fff; padding: 15px 40px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; font-weight: 900; }
         #toast.show { visibility: visible; animation: fadeInUp 0.4s; }
-        
-        footer { text-align: center; padding: 60px 0; color: #bbb; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+        footer { text-align: center; padding: 40px 0; color: #bbb; font-weight: 700; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-<div id="cart-overlay" onclick="toggleCart()"></div>
-
+<!-- KOSZYK -->
 <div id="cart-sidebar">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
-        <h2 style="margin:0; font-weight:900; letter-spacing: -1px;">TWÓJ KOSZYK</h2>
-        <span onclick="toggleCart()" style="cursor:pointer; font-size:2.5rem; line-height: 0.5;">&times;</span>
+        <h2 style="margin:0; font-weight:900;">KOSZYK</h2>
+        <span onclick="toggleCart()" style="cursor:pointer; font-size:2.5rem;">&times;</span>
     </div>
-    <div id="cart-list" style="flex:1; overflow-y:auto;">
-        <p style="text-align:center; color:#ccc; margin-top:100px; font-weight: 700;">KOSZYK JEST PUSTY</p>
-    </div>
+    <div id="cart-list" style="flex:1; overflow-y:auto;"></div>
     <div style="border-top:2px solid #f9f9f9; padding-top:20px;">
         <div style="display:flex; justify-content:space-between; font-size:1.5rem; font-weight: 900; margin-bottom:20px;">
             <span>SUMA:</span>
             <span id="total-price" style="color: var(--main-blue);">0.00 ZŁ</span>
         </div>
-        <button onclick="checkout()" style="width:100%; background:var(--discord-blurple); color:white; border:none; padding:20px; border-radius:20px; font-weight:900; cursor:pointer; font-size: 1.1rem;">FINALIZUJ ZAKUP</button>
+        <button onclick="checkout()" style="width:100%; background:var(--discord-blurple); color:white; border:none; padding:20px; border-radius:20px; font-weight:900; cursor:pointer;">FINALIZUJ ZAKUP</button>
     </div>
 </div>
 
@@ -143,33 +116,14 @@
     <a href="https://guns.lol/m1czzzzz" target="_blank" style="color:var(--social-pink)">SOCIALE</a>
 </nav>
 
+<!-- GÓRA STRONY -->
 <section class="landing-page">
     <div class="main-hero-container">
-        <!-- LOGO I IP -->
-        <div class="hero-box">
+        <div class="hero-box box-with-bg">
             <img src="image_efc264.png">
             <h1>LUXHC.PL</h1>
             <button class="ip-btn" onclick="copyIP()">IP: LUXHC.PL</button>
         </div>
-
-        <!-- DISCORD Z ANIMOWANYM LUDZIKIEM -->
-        <div class="discord-section">
-            <div class="discord-bg-text">Discord</div>
-            <div class="discord-content">
-                <img src="ludzik discord.jpg" class="ludzik-img">
-                <div class="discord-info">
-                    <h2>NASZ SERWER<br>DISCORD</h2>
-                    <p>Wbijaj po darmowe rangi i kody!</p>
-                    <div>
-                        <span id="discord-count" class="members-count">...</span>
-                        <span class="members-label">Osób Online</span>
-                    </div>
-                    <a href="https://discord.gg/YCGZD43BVA" target="_blank" class="join-btn">DOŁĄCZ DO NAS</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- BOCZNE MENU -->
         <div class="hero-side-btns">
             <a href="#shop" class="side-btn btn-shop">SKLEP</a>
             <a href="https://guns.lol/m1czzzzz" target="_blank" class="side-btn btn-social">SOCIALE</a>
@@ -179,41 +133,52 @@
 
 <!-- SKLEP -->
 <div id="shop" class="container">
-    <h2 class="section-title">💎 Przedmioty i Rangi</h2>
+    <h2 class="section-title">💎 Oferta Serwera</h2>
     <div class="grid-items">
         <div class="item-card">
             <h3>RANGA VIP</h3>
-            <p style="color:#888;">Zestaw przywilejów na 30 dni</p>
             <h2 style="color:var(--main-blue);">14.99 ZŁ</h2>
             <button class="buy-btn" onclick="addToCart('RANGA VIP', 14.99)">DODAJ DO KOSZYKA</button>
         </div>
         <div class="item-card">
             <h3>RANGA LUX</h3>
-            <p style="color:#888;">Najlepsza ranga na serwerze!</p>
             <h2 style="color:var(--main-blue);">59.99 ZŁ</h2>
             <button class="buy-btn" onclick="addToCart('RANGA LUX', 59.99)">DODAJ DO KOSZYKA</button>
         </div>
         <div class="item-card">
-            <h3>10x LUX KLUCZ</h3>
-            <p style="color:#888;">Otwórz skrzynie i zdobądź sety</p>
-            <h2 style="color:var(--main-blue);">29.99 ZŁ</h2>
-            <button class="buy-btn" onclick="addToCart('10x LUX KLUCZ', 29.99)">DODAJ DO KOSZYKA</button>
+            <h3>KLUCZE DO SKRZYŃ</h3>
+            <h2 style="color:var(--main-blue);">9.99 ZŁ</h2>
+            <button class="buy-btn" onclick="addToCart('KLUCZE', 9.99)">DODAJ DO KOSZYKA</button>
         </div>
     </div>
 </div>
+
+<!-- DISCORD NA DOLE -->
+<section class="discord-section box-with-bg">
+    <div class="discord-content">
+        <img src="ludzik discord.png" class="ludzik-img">
+        <div class="discord-info">
+            <h2>NASZ SERWER DISCORD</h2>
+            <p>Wbijaj po darmowe rangi i kody!</p>
+            <div>
+                <span id="discord-count" class="members-count">...</span>
+                <span style="color: #00a2ff; font-weight: 900; letter-spacing: 2px;">OSÓB ONLINE</span>
+            </div>
+            <a href="https://discord.gg/YCGZD43BVA" target="_blank" class="join-btn">DOŁĄCZ DO NAS</a>
+        </div>
+    </div>
+</section>
 
 <footer>&copy; 2026 LUXHC.PL - WSZELKIE PRAWA ZASTRZEŻONE</footer>
 
 <div id="toast">POWIADOMIENIE</div>
 
 <script>
-    // --- DISCORD LIVE COUNTER ---
     const SERVER_ID = "1481567847137153097"; 
 
     async function fetchDiscord() {
         try {
             const r = await fetch(`https://discord.com/api/guilds/${SERVER_ID}/widget.json`);
-            if (!r.ok) throw new Error();
             const d = await r.json();
             document.getElementById('discord-count').innerText = d.presence_count;
         } catch (e) {
@@ -223,76 +188,40 @@
     fetchDiscord();
     setInterval(fetchDiscord, 30000);
 
-    // --- LOGIKA KOSZYKA ---
     let cart = [];
-    
-    function toggleCart() {
-        const side = document.getElementById('cart-sidebar');
-        const over = document.getElementById('cart-overlay');
-        side.classList.toggle('active');
-        over.style.display = side.classList.contains('active') ? 'block' : 'none';
-    }
-
+    function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
     function addToCart(name, price) {
         cart.push({ id: Date.now(), name, price });
         updateCartUI();
         showToast(`🛒 Dodano: ${name}`);
     }
-
-    function removeFromCart(id) {
-        cart = cart.filter(item => item.id !== id);
-        updateCartUI();
-    }
-
     function updateCartUI() {
         const list = document.getElementById('cart-list');
         const dot = document.getElementById('cart-dot');
         const totalEl = document.getElementById('total-price');
-        
         dot.style.display = cart.length > 0 ? 'block' : 'none';
         dot.innerText = cart.length;
-
-        if (cart.length === 0) {
-            list.innerHTML = '<p style="text-align:center; color:#ccc; margin-top:100px; font-weight: 700;">KOSZYK JEST PUSTY</p>';
-            totalEl.innerText = "0.00 ZŁ";
-            return;
-        }
-
         let total = 0;
         list.innerHTML = "";
         cart.forEach(item => {
             total += item.price;
-            list.innerHTML += `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:#f9f9f9; padding:15px; border-radius:15px; margin-bottom:10px;">
-                    <div>
-                        <div style="font-weight:900; font-size:0.9rem;">${item.name}</div>
-                        <div style="color:var(--main-blue); font-weight:700;">${item.price} ZŁ</div>
-                    </div>
-                    <span onclick="removeFromCart(${item.id})" style="color:#ff4d4d; cursor:pointer; font-weight:900; font-size:1.2rem;">&times;</span>
-                </div>
-            `;
+            list.innerHTML += `<div style="background:#f9f9f9; padding:10px; border-radius:10px; margin-bottom:10px; display:flex; justify-content:space-between;"><span>${item.name}</span><b>${item.price} ZŁ</b></div>`;
         });
         totalEl.innerText = total.toFixed(2) + " ZŁ";
     }
-
-    function checkout() {
-        if (cart.length === 0) return;
-        const summary = "MOJE ZAMÓWIENIE: " + cart.map(i => i.name).join(", ");
-        navigator.clipboard.writeText(summary);
-        showToast("📋 SKOPIOWANO ZAMÓWIENIE DO SCHOWKA!");
-        setTimeout(() => { window.open('https://discord.gg/YCGZD43BVA', '_blank'); }, 1000);
-    }
-
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.innerText = msg;
         t.classList.add('show');
         setTimeout(() => t.classList.remove('show'), 3000);
     }
-
     function copyIP() {
         navigator.clipboard.writeText("LUXHC.PL");
-        showToast("✅ SKOPIOWANO IP: LUXHC.PL");
+        showToast("✅ SKOPIOWANO IP");
+    }
+    function checkout() {
+        showToast("📋 SKOPIOWANO ZAMÓWIENIE!");
+        window.open('https://discord.gg/YCGZD43BVA', '_blank');
     }
 </script>
 
