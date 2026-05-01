@@ -15,7 +15,7 @@
         }
 
         @keyframes floatLudzik {
-            0%, 100% { transform: translateY(0); }
+            0%, 100__ { transform: translateY(0); }
             50% { transform: translateY(-25px); }
         }
 
@@ -29,50 +29,49 @@
         .header-nav a { text-decoration: none; color: #333; transition: 0.3s; cursor: pointer; font-size: 0.9rem; position: relative; }
         #cart-dot { position: absolute; top: -10px; right: -15px; background: #ff4d4d; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; display: none; }
 
-        /* --- GÓRNY BANNER (Tło tlo.png) --- */
-        .landing-page { padding: 60px 0; display: flex; justify-content: center; background: white; }
-        .main-hero-container { display: flex; gap: 20px; max-width: 1300px; width: 95%; height: 500px; }
+        /* --- GÓRNY BANNER (Przycięty i dopasowany) --- */
+        .landing-page { padding: 40px 0; display: flex; justify-content: center; background: white; }
+        .main-hero-container { display: flex; gap: 20px; max-width: 1200px; width: 95%; height: 350px; } /* Zmniejszona wysokość */
 
         .hero-box {
-            flex: 2; padding: 40px; text-align: center; color: white;
+            flex: 2; padding: 20px; text-align: center; color: white;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-image: url('tlo.png'); /* ZMIENIONO NA tlo.png */
+            background-image: url('tlo.png'); 
             background-size: cover;
             background-position: center;
             border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
-        .hero-box img { width: 140px; margin-bottom: 20px; }
-        .hero-box h1 { font-size: 4rem; margin: 10px 0; font-weight: 900; letter-spacing: 2px; }
-        .ip-btn { background: #4da6ff; color: white; border: none; padding: 15px 40px; border-radius: 15px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .hero-box img { width: 110px; margin-bottom: 10px; }
+        .hero-box h1 { font-size: 3.5rem; margin: 5px 0; font-weight: 900; letter-spacing: 2px; }
+        .ip-btn { background: #4da6ff; color: white; border: none; padding: 12px 35px; border-radius: 12px; font-weight: 900; font-size: 1rem; cursor: pointer; transition: 0.3s; }
 
-        .hero-side-btns { flex: 0.8; display: flex; flex-direction: column; gap: 20px; }
-        .side-btn { flex: 1; border-radius: 35px; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.5rem; text-decoration: none; transition: 0.4s; text-transform: uppercase; }
+        .hero-side-btns { flex: 0.6; display: flex; flex-direction: column; gap: 15px; }
+        .side-btn { flex: 1; border-radius: 30px; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.3rem; text-decoration: none; transition: 0.4s; text-transform: uppercase; }
         .btn-shop { background: var(--green-shop); color: #000; }
         .btn-social { background: var(--social-pink); color: white; }
 
-        /* --- SKLEP --- */
-        .container { max-width: 1200px; margin: 80px auto; width: 95%; }
+        /* --- SKLEP (Pełna oferta) --- */
+        .container { max-width: 1200px; margin: 60px auto; width: 95%; }
         .section-title { text-align: center; font-weight: 900; font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; }
-        .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .item-card { background: white; padding: 40px; border-radius: 35px; border: 1px solid #eee; text-align: center; transition: 0.4s; }
-        .buy-btn { background: var(--yellow-accent); border: none; width: 100%; padding: 18px; font-weight: 900; cursor: pointer; border-radius: 15px; margin-top: 20px; }
+        .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .item-card { background: white; padding: 35px; border-radius: 35px; border: 1px solid #eee; text-align: center; transition: 0.4s; }
+        .buy-btn { background: var(--yellow-accent); border: none; width: 100%; padding: 16px; font-weight: 900; cursor: pointer; border-radius: 15px; margin-top: 20px; text-transform: uppercase; }
 
-        /* --- DISCORD (CZARNY) --- */
+        /* --- DISCORD --- */
         .discord-section {
-            max-width: 1300px; width: 95%; margin: 50px auto; padding: 60px;
-            display: flex; align-items: center; position: relative; overflow: hidden;
-            background: #000000; 
-            border-radius: 40px;
+            max-width: 1200px; width: 95%; margin: 50px auto; padding: 50px;
+            display: flex; align-items: center; background: #000000; border-radius: 40px;
         }
-        .discord-content { display: flex; align-items: center; justify-content: center; gap: 80px; width: 100%; z-index: 5; }
-        .ludzik-img { width: 250px; animation: floatLudzik 3s infinite ease-in-out; }
+        .discord-content { display: flex; align-items: center; justify-content: center; gap: 60px; width: 100%; }
+        .ludzik-img { width: 220px; animation: floatLudzik 3s infinite ease-in-out; }
         .discord-info { color: white; text-align: center; }
-        .discord-info h2 { font-size: 2.5rem; margin: 0; font-weight: 900; text-transform: uppercase; }
-        .members-count { font-size: 5rem; font-weight: 900; line-height: 1; display: block; margin: 10px 0; }
-        .join-btn { background: white; color: black; padding: 18px 50px; border-radius: 20px; text-decoration: none; font-weight: 900; display: inline-block; margin-top: 20px; transition: 0.3s; }
+        .discord-info h2 { font-size: 2.2rem; margin: 0; font-weight: 900; text-transform: uppercase; }
+        .members-count { font-size: 4.5rem; font-weight: 900; line-height: 1; display: block; margin: 10px 0; }
+        .join-btn { background: white; color: black; padding: 16px 45px; border-radius: 18px; text-decoration: none; font-weight: 900; display: inline-block; margin-top: 20px; transition: 0.3s; }
 
-        /* --- KOSZYK I TOAST --- */
+        /* --- KOSZYK I POWIADOMIENIA --- */
         #cart-sidebar { position: fixed; top: 0; right: -450px; width: 400px; max-width: 100%; height: 100vh; background: white; z-index: 5000; transition: 0.5s; padding: 40px; display: flex; flex-direction: column; box-shadow: -15px 0 40px rgba(0,0,0,0.1); }
         #cart-sidebar.active { right: 0; }
         #toast { visibility: hidden; background: #111; color: #fff; padding: 15px 40px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; font-weight: 900; }
@@ -83,6 +82,7 @@
 </head>
 <body>
 
+<!-- KOSZYK BOCZNY -->
 <div id="cart-sidebar">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
         <h2 style="margin:0; font-weight:900;">KOSZYK</h2>
@@ -105,6 +105,7 @@
     <a href="https://guns.lol/m1czzzzz" target="_blank" style="color:var(--social-pink)">SOCIALE</a>
 </nav>
 
+<!-- PRZYCIĘTY BANNER -->
 <section class="landing-page">
     <div class="main-hero-container">
         <div class="hero-box">
@@ -119,9 +120,11 @@
     </div>
 </section>
 
+<!-- PEŁNY SKLEP -->
 <div id="shop" class="container">
-    <h2 class="section-title">💎 Oferta Serwera</h2>
+    <h2 class="section-title">💎 OFERTA SERWERA</h2>
     <div class="grid-items">
+        <!-- RANGI -->
         <div class="item-card">
             <h3>RANGA VIP</h3>
             <h2 style="color:var(--main-blue);">14.99 ZŁ</h2>
@@ -132,14 +135,22 @@
             <h2 style="color:var(--main-blue);">59.99 ZŁ</h2>
             <button class="buy-btn" onclick="addToCart('RANGA LUX', 59.99)">DODAJ DO KOSZYKA</button>
         </div>
+        <!-- KLUCZE -->
         <div class="item-card">
-            <h3>KLUCZE</h3>
+            <h3>3x KLUCZ LUX</h3>
             <h2 style="color:var(--main-blue);">9.99 ZŁ</h2>
-            <button class="buy-btn" onclick="addToCart('KLUCZE', 9.99)">DODAJ DO KOSZYKA</button>
+            <button class="buy-btn" onclick="addToCart('3x KLUCZ LUX', 9.99)">DODAJ DO KOSZYKA</button>
+        </div>
+        <!-- PAKIETY -->
+        <div class="item-card">
+            <h3>PAKIET STARTOWY</h3>
+            <h2 style="color:var(--main-blue);">24.99 ZŁ</h2>
+            <button class="buy-btn" onclick="addToCart('PAKIET STARTOWY', 24.99)">DODAJ DO KOSZYKA</button>
         </div>
     </div>
 </div>
 
+<!-- DISCORD (BEZ ZMIAN) -->
 <section class="discord-section">
     <div class="discord-content">
         <img src="ludzik discord.png" class="ludzik-img">
