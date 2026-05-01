@@ -14,14 +14,9 @@
             --yellow-accent: #ffcc00;
         }
 
-        /* --- ANIMACJE --- */
         @keyframes floatLudzik {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-25px); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         body { background-color: #f4f7f6; font-family: 'Poppins', sans-serif; margin: 0; scroll-behavior: smooth; overflow-x: hidden; }
@@ -32,52 +27,47 @@
             font-weight: 900; text-transform: uppercase; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
         .header-nav a { text-decoration: none; color: #333; transition: 0.3s; cursor: pointer; font-size: 0.9rem; position: relative; }
-        .header-nav a:hover { color: var(--main-blue); }
         #cart-dot { position: absolute; top: -10px; right: -15px; background: #ff4d4d; color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; display: none; }
 
-        /* --- WSPÓLNY STYL BOKSÓW Z TŁEM --- */
-        .box-with-bg {
-            background-image: url('tlo.png'); /* Tutaj Twój trzeci obrazek */
-            background-size: cover;
-            background-position: center;
-            border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* --- HERO SECTION (GÓRA) --- */
+        /* --- GÓRNY BANNER (Tło tlo.png) --- */
         .landing-page { padding: 60px 0; display: flex; justify-content: center; background: white; }
         .main-hero-container { display: flex; gap: 20px; max-width: 1300px; width: 95%; height: 500px; }
 
         .hero-box {
             flex: 2; padding: 40px; text-align: center; color: white;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-image: url('tlo.png'); /* ZMIENIONO NA tlo.png */
+            background-size: cover;
+            background-position: center;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
         }
         .hero-box img { width: 140px; margin-bottom: 20px; }
-        .hero-box h1 { font-size: 4rem; margin: 10px 0; font-weight: 900; letter-spacing: 2px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
-        .ip-btn { background: #4da6ff; color: white; border: none; padding: 15px 40px; border-radius: 15px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .ip-btn:hover { transform: scale(1.05); }
+        .hero-box h1 { font-size: 4rem; margin: 10px 0; font-weight: 900; letter-spacing: 2px; }
+        .ip-btn { background: #4da6ff; color: white; border: none; padding: 15px 40px; border-radius: 15px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
 
         .hero-side-btns { flex: 0.8; display: flex; flex-direction: column; gap: 20px; }
         .side-btn { flex: 1; border-radius: 35px; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 1.5rem; text-decoration: none; transition: 0.4s; text-transform: uppercase; }
         .btn-shop { background: var(--green-shop); color: #000; }
         .btn-social { background: var(--social-pink); color: white; }
 
-        /* --- SKLEP (ŚRODEK) --- */
+        /* --- SKLEP --- */
         .container { max-width: 1200px; margin: 80px auto; width: 95%; }
         .section-title { text-align: center; font-weight: 900; font-size: 2.5rem; margin-bottom: 40px; text-transform: uppercase; }
         .grid-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .item-card { background: white; padding: 40px; border-radius: 35px; border: 1px solid #eee; text-align: center; transition: 0.4s; }
         .buy-btn { background: var(--yellow-accent); border: none; width: 100%; padding: 18px; font-weight: 900; cursor: pointer; border-radius: 15px; margin-top: 20px; }
 
-        /* --- DISCORD (DÓŁ) --- */
+        /* --- DISCORD (CZARNY) --- */
         .discord-section {
             max-width: 1300px; width: 95%; margin: 50px auto; padding: 60px;
             display: flex; align-items: center; position: relative; overflow: hidden;
+            background: #000000; 
+            border-radius: 40px;
         }
         .discord-content { display: flex; align-items: center; justify-content: center; gap: 80px; width: 100%; z-index: 5; }
         .ludzik-img { width: 250px; animation: floatLudzik 3s infinite ease-in-out; }
-        .discord-info { color: white; }
+        .discord-info { color: white; text-align: center; }
         .discord-info h2 { font-size: 2.5rem; margin: 0; font-weight: 900; text-transform: uppercase; }
         .members-count { font-size: 5rem; font-weight: 900; line-height: 1; display: block; margin: 10px 0; }
         .join-btn { background: white; color: black; padding: 18px 50px; border-radius: 20px; text-decoration: none; font-weight: 900; display: inline-block; margin-top: 20px; transition: 0.3s; }
@@ -86,14 +76,13 @@
         #cart-sidebar { position: fixed; top: 0; right: -450px; width: 400px; max-width: 100%; height: 100vh; background: white; z-index: 5000; transition: 0.5s; padding: 40px; display: flex; flex-direction: column; box-shadow: -15px 0 40px rgba(0,0,0,0.1); }
         #cart-sidebar.active { right: 0; }
         #toast { visibility: hidden; background: #111; color: #fff; padding: 15px 40px; border-radius: 50px; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; font-weight: 900; }
-        #toast.show { visibility: visible; animation: fadeInUp 0.4s; }
+        #toast.show { visibility: visible; }
 
         footer { text-align: center; padding: 40px 0; color: #bbb; font-weight: 700; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-<!-- KOSZYK -->
 <div id="cart-sidebar">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
         <h2 style="margin:0; font-weight:900;">KOSZYK</h2>
@@ -116,10 +105,9 @@
     <a href="https://guns.lol/m1czzzzz" target="_blank" style="color:var(--social-pink)">SOCIALE</a>
 </nav>
 
-<!-- GÓRA STRONY -->
 <section class="landing-page">
     <div class="main-hero-container">
-        <div class="hero-box box-with-bg">
+        <div class="hero-box">
             <img src="image_efc264.png">
             <h1>LUXHC.PL</h1>
             <button class="ip-btn" onclick="copyIP()">IP: LUXHC.PL</button>
@@ -131,7 +119,6 @@
     </div>
 </section>
 
-<!-- SKLEP -->
 <div id="shop" class="container">
     <h2 class="section-title">💎 Oferta Serwera</h2>
     <div class="grid-items">
@@ -146,20 +133,18 @@
             <button class="buy-btn" onclick="addToCart('RANGA LUX', 59.99)">DODAJ DO KOSZYKA</button>
         </div>
         <div class="item-card">
-            <h3>KLUCZE DO SKRZYŃ</h3>
+            <h3>KLUCZE</h3>
             <h2 style="color:var(--main-blue);">9.99 ZŁ</h2>
             <button class="buy-btn" onclick="addToCart('KLUCZE', 9.99)">DODAJ DO KOSZYKA</button>
         </div>
     </div>
 </div>
 
-<!-- DISCORD NA DOLE -->
-<section class="discord-section box-with-bg">
+<section class="discord-section">
     <div class="discord-content">
         <img src="ludzik discord.png" class="ludzik-img">
         <div class="discord-info">
             <h2>NASZ SERWER DISCORD</h2>
-            <p>Wbijaj po darmowe rangi i kody!</p>
             <div>
                 <span id="discord-count" class="members-count">...</span>
                 <span style="color: #00a2ff; font-weight: 900; letter-spacing: 2px;">OSÓB ONLINE</span>
@@ -169,7 +154,7 @@
     </div>
 </section>
 
-<footer>&copy; 2026 LUXHC.PL - WSZELKIE PRAWA ZASTRZEŻONE</footer>
+<footer>&copy; 2026 LUXHC.PL</footer>
 
 <div id="toast">POWIADOMIENIE</div>
 
@@ -182,7 +167,7 @@
             const d = await r.json();
             document.getElementById('discord-count').innerText = d.presence_count;
         } catch (e) {
-            document.getElementById('discord-count').innerText = "WŁĄCZ WIDGET";
+            document.getElementById('discord-count').innerText = "ONLINE";
         }
     }
     fetchDiscord();
