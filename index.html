@@ -11,9 +11,10 @@
             --yellow: #ffcc00;
             --green-shop: #2eff8c;
             --social-pink: #ff4db8;
+            --discord-bg: #0a0a0a;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: #f8f9fa; color: #333; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: #f8f9fa; color: #333; overflow-x: hidden; }
 
         /* NAWIGACJA */
         .nav { display: flex; justify-content: center; gap: 40px; padding: 20px; background: white; font-weight: 900; text-transform: uppercase; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
@@ -39,7 +40,7 @@
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         .bouncing { width: 60px; animation: bounce 1.5s infinite ease-in-out; margin-bottom: 10px; border-radius: 10px; }
 
-        /* SKLEP - TABELA I PAKIETY */
+        /* SKLEP */
         .shop-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
         .section-title { text-align: center; font-weight: 900; font-size: 24px; margin: 50px 0 30px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
@@ -55,22 +56,42 @@
 
         .buy-tag { background: rgba(255,255,255,0.3); border: 1px solid rgba(0,0,0,0.1); padding: 5px 15px; border-radius: 8px; display: block; margin-top: 5px; cursor: pointer; color: inherit; }
 
-        /* GRID PAKIETY I KLUCZE */
         .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .item-card { background: white; padding: 30px; border-radius: 25px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.02); border: 1px solid #eee; }
-        .val-text { font-size: 10px; color: #bbb; font-weight: 900; display: block; margin-bottom: 5px; }
-        .item-card h3 { margin: 10px 0; font-weight: 900; font-size: 16px; }
-        .item-card ul { list-style: none; padding: 0; font-size: 11px; color: #777; margin-bottom: 20px; }
         .btn-yellow { background: var(--yellow); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 900; cursor: pointer; font-size: 14px; }
 
-        /* FOOTER */
-        .footer { text-align: center; padding: 60px 20px; color: #bbb; font-size: 11px; font-weight: 700; }
-        .footer a { color: #bbb; text-decoration: none; margin: 0 10px; }
+        /* NOWA SEKCJA DISCORD (NA DOLE) */
+        .discord-footer-section { 
+            background: var(--discord-bg); 
+            padding: 60px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 50px;
+            color: white;
+            margin-top: 100px;
+        }
+        .discord-ludzik-container { position: relative; }
+        .ludzik-img { 
+            width: 250px; 
+            animation: bounce 2s infinite ease-in-out; 
+        }
+        .discord-info h2 { font-weight: 900; font-size: 32px; margin: 0; line-height: 1.1; }
+        .discord-info p { color: #888; font-size: 14px; margin: 10px 0; }
+        .member-count { font-weight: 900; font-size: 24px; color: white; margin: 20px 0; }
+        .member-count span { display: block; color: var(--blue); font-size: 12px; text-transform: uppercase; }
+        .btn-discord-join { 
+            background: white; color: black; border: none; padding: 15px 40px; 
+            border-radius: 10px; font-weight: 900; text-decoration: none; 
+            display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .btn-discord-join:hover { transform: scale(1.05); }
+
+        .copyright { background: var(--discord-bg); text-align: center; color: #444; padding-bottom: 20px; font-size: 12px; font-weight: 700; border-top: 1px solid #111; }
 
         /* KOSZYK */
-        #cart-sidebar { position: fixed; top: 0; right: -400px; width: 320px; height: 100vh; background: white; z-index: 2000; transition: 0.4s; padding: 30px; box-shadow: -10px 0 30px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        #cart-sidebar { position: fixed; top: 0; right: -400px; width: 320px; height: 100vh; background: white; z-index: 2000; transition: 0.4s; padding: 30px; box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
         #cart-sidebar.active { right: 0; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-weight: 700; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -83,18 +104,17 @@
 
 <div id="cart-sidebar">
     <span onclick="toggleCart()" style="cursor:pointer; font-weight:900;">✕ ZAMKNIJ</span>
-    <h2 style="font-weight:900; margin-top:20px;">KOSZYK</h2>
-    <div id="cart-display" style="flex:1"></div>
-    <div style="font-weight:900; border-top:2px solid #eee; padding-top:15px;">SUMA: <span id="total-price">0.00</span> ZŁ</div>
+    <div id="cart-display" style="margin-top:20px;"></div>
+    <div style="font-weight:900; border-top:2px solid #eee; padding-top:15px; margin-top:15px;">SUMA: <span id="total-price">0.00</span> ZŁ</div>
     <button class="btn-yellow" style="margin-top:20px; background:#5ba6ff; color:white;">PRZEJDŹ DO PŁATNOŚCI</button>
 </div>
 
+<!-- HERO -->
 <section class="hero-section">
     <div class="hero-banner-main">
         <img src="image_efc264.png" class="logo">
         <button class="ip-btn" onclick="copyIP()">IP: LUXHC.PL</button>
     </div>
-
     <div class="hero-side-btns">
         <a href="https://guns.lol/twojlink" class="side-btn btn-socials">
             <span style="font-size:12px">NASZE</span>
@@ -108,8 +128,8 @@
     </div>
 </section>
 
+<!-- SKLEP -->
 <div id="shop" class="shop-container">
-    
     <div class="section-title">🏆 PORÓWNANIE RANG</div>
     <div class="table-card">
         <table>
@@ -124,47 +144,50 @@
             <tr><td class="side-head">Ilość sethome</td><td>2</td><td>3</td><td>5</td><td>5</td></tr>
             <tr><td class="side-head">Mnożnik Dropu</td><td>1.2x</td><td>1.5x</td><td>2.0x</td><td>2.0x</td></tr>
             <tr><td class="side-head">Pisanie Kolorami</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td></tr>
-            <tr><td class="side-head">Komenda /repair</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
-            <tr><td class="side-head">Komenda /ec</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
         </table>
     </div>
 
     <div class="section-title">💎 PAKIETY BOGACZA</div>
     <div class="grid-cards">
         <div class="item-card">
-            <span class="val-text">WARTOŚĆ 200 ZŁ</span>
+            <span style="font-size:10px; color:#bbb; font-weight:900;">WARTOŚĆ 200 ZŁ</span>
             <h3>PAKIET BOGACZA</h3>
-            <ul>
-                <li>• 18x LUX KLUCZ</li>
-                <li>• 24x EPICKI KLUCZ</li>
-            </ul>
             <button class="btn-yellow" onclick="addToCart('Pakiet Bogacza', 159.99)">159.99 ZŁ</button>
         </div>
         <div class="item-card">
-            <span class="val-text">WARTOŚĆ 150 ZŁ</span>
+            <span style="font-size:10px; color:#bbb; font-weight:900;">WARTOŚĆ 150 ZŁ</span>
             <h3>DUŻY PAKIET KLUCZY</h3>
-            <ul>
-                <li>• 10x LUX KLUCZ</li>
-                <li>• 15x EPICKI KLUCZ</li>
-            </ul>
             <button class="btn-yellow" onclick="addToCart('Duży Pakiet Kluczy', 99.99)">99.99 ZŁ</button>
         </div>
     </div>
-
-    <div class="section-title">🔑 KLUCZE</div>
-    <div class="grid-cards" style="grid-template-columns: repeat(4, 1fr);">
-        <div class="item-card"><h3>LUX KLUCZ</h3><button class="btn-yellow" onclick="addToCart('LUX Klucz', 19.99)">19.99 ZŁ</button></div>
-        <div class="item-card"><h3>KLUCZ PETÓW</h3><button class="btn-yellow" onclick="addToCart('Klucz Petów', 14.99)">14.99 ZŁ</button></div>
-        <div class="item-card"><h3>EPICKI KLUCZ</h3><button class="btn-yellow" onclick="addToCart('Epicki Klucz', 4.99)">4.99 ZŁ</button></div>
-        <div class="item-card"><h3>RZADKI KLUCZ</h3><button class="btn-yellow" onclick="addToCart('Rzadki Klucz', 1.99)">1.99 ZŁ</button></div>
-    </div>
-
 </div>
 
-<footer class="footer">
-    <p>© 2026 LUXHC.PL - Wszelkie prawa zastrzeżone.</p>
-    <a href="https://discord.gg/YCGZD43BVA">DISCORD</a> | <a href="#">REGULAMIN</a>
-</footer>
+<!-- NOWY DISCORD FOOTER Z LUDZIKIEM -->
+<section class="discord-footer-section">
+    <div class="discord-ludzik-container">
+        <!-- SKACZĄCY LUDZIK -->
+        <img src="ludzik discord.png" class="ludzik-img">
+    </div>
+    
+    <div class="discord-info">
+        <h2>ODWIEDŹ NASZ SERWER<br>DISCORD</h2>
+        <p>Aby być ze wszystkim na bieżąco</p>
+        
+        <div class="member-count">
+            40
+            <span>CZŁONKÓW</span>
+        </div>
+        
+        <a href="https://discord.gg/YCGZD43BVA" class="btn-discord-join">
+            DOŁĄCZ 
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.196.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        </a>
+    </div>
+</section>
+
+<div class="copyright">
+    © 2026 LUXHC.PL - Wszelkie prawa zastrzeżone.
+</div>
 
 <script>
     let cart = [];
@@ -178,7 +201,7 @@
         const list = document.getElementById('cart-display');
         document.getElementById('cart-count').innerText = cart.length;
         list.innerHTML = cart.map((item, i) => `
-            <div class="cart-item">
+            <div style="display:flex; justify-content:space-between; padding:5px 0; font-weight:700; font-size:13px">
                 <span>${item.name}</span>
                 <span>${item.price} zł <b onclick="remove(${i})" style="color:red; cursor:pointer; margin-left:10px">✕</b></span>
             </div>`).join('');
